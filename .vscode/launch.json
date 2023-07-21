@@ -1,0 +1,39 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "test",
+            "type": "cppdbg",
+            // debug的模式，分为launch和attach两种
+            "request": "launch",
+            // 程序可执行文件的完整路径
+            "program": "/opt/nvidia/deepstream/deepstream-6.0/bin/deepstream-app", 
+            // 传递给程序的命令行参数
+            "args": ["-c", "ds_faster_rcnn.cfg"],
+            // 可选参数。如果为 true，则调试程序应在目标的入口点处停止
+            "stopAtEntry": false,
+            // 目标的工作目录
+            "cwd": "${workspaceFolder}",
+            // 要添加到程序环境的环境变量
+            "environment": [{"name": "LD_PRELOAD", "value": "./nvinfer_faster_rcnn_impl/libmmdeploy_tensorrt_ops.so"}],
+            "externalConsole": false,
+            // 指示 MIDebugEngine 要连接到的控制台调试程序。允许的值为 "gdb"、"lldb"。
+            "MIMode": "gdb",
+            
+            "setupCommands": [
+                {
+                "description": "Enable pretty-printing for gdb",
+                "text": "-enable-pretty-printing",
+                "ignoreFailures": true
+                }
+            ],
+            // 调试会话开始前要运行的任务
+            // "preLaunchTask": "test",
+            // MI 调试程序(如 gdb)的路径。如果未指定，将首先在路径中搜索调试程序
+            "miDebuggerPath": "/usr/bin/gdb"
+        }
+    ]
+}
